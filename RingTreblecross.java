@@ -88,28 +88,28 @@ public class RingTreblecross {
          * You need to pack the score and best successor to a Best object and return it
          */
     	List <GameState> gStates = getSuccessors(state);
+    	List<Best> besties = new LinkedList<Best>();
     	
     	if (isTerminalState(state)) {
     		
-    		return new Best(-1, state);
+    		return new Best(1, state);
     	}
     	else {
     		
-    		double score = Double.POSITIVE_INFINITY;
+    		int score = 9999;
     		Best bb = new Best( (int) score, state );
-    			for(GameState node : gStates) {
-    				
-    				//bb = compareMethod2(bb, maxValueAndBestSuccessor(node));
-    					if (maxValueAndBestSuccessor(node).score == 1) {
-    						
-    						return new Best(1, state);
-    					}
-    					
-    					bb = new Best(-1, state);
-    					
-    			}
-    		//if (bb.score != -1) System.out.println("TRUE");
-    			//return bb;
+    		for(GameState node : gStates) {
+				
+				//bb = compareMethod2(bb, maxValueAndBestSuccessor(node));
+					if (maxValueAndBestSuccessor(node).score == -1) {
+						
+						return new Best(-1, state);
+					}
+					
+					bb = new Best(1, state);
+					
+			}
+    		
     			return bb;
     	}
     	
@@ -130,26 +130,25 @@ public class RingTreblecross {
     	
     				if (isTerminalState(state)) {
     				
-    					return new Best (1, state);
+    					return new Best (-1, state);
     				}
     				else {
-    					double score = Double.NEGATIVE_INFINITY;
-    					Best bb = new Best((int)score, state);
+    					int score = -9999;
     					
-    		    			for(GameState node : gStates) {
+    					Best bb = new Best((int)score, state);
+    					for(GameState node : gStates) {
     		    			
-    		    				if (minValueAndBestSuccessor(node).score == -1) {
-    		    					
-    		    					return new Best(-1,node);
-    		    				}
-    		    				
-    		    				
+		    				if (minValueAndBestSuccessor(node).score == 1) {
+		    					
+		    					return new Best(1,node);
+		    				}
+		    				
+		    				
 
-    		    			}
+		    			}
     		    		
     		    			//return null;
-    		    			return new Best(1, gStates.get(0));
-
+    		    			return new Best(-1, gStates.get(0));
     				}
     }
     
@@ -159,10 +158,7 @@ public class RingTreblecross {
     	if (node1.score > node2.score)
     		return node1;
     	
-//    	else if (node1.score == node2.score) {
-//    		
-//    		return node1;
-//    	}
+
     	else {
     		return node2;
     	}
