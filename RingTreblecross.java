@@ -95,27 +95,22 @@ public class RingTreblecross {
     	}
     	else {
     		
-    		int score = 1000;
-    		Best bb = null;
+    		double score = Double.POSITIVE_INFINITY;
+    		Best bb = new Best( (int) score, state );
     			for(GameState node : gStates) {
     				
-    				//Best bb = new Best(score, ) = ;maxValueAndBestSuccessor(node)
-    				
-    				if (maxValueAndBestSuccessor(node).score == 1) {
-    					//System.out.println("returning 1");
-    					return new Best(1, node);
-    				}
-    				else {
-    					//System.out.println("returning -1");
-    					bb = new Best(-1, node);
-    				}
+    				//bb = compareMethod2(bb, maxValueAndBestSuccessor(node));
+    					if (maxValueAndBestSuccessor(node).score == 1) {
+    						
+    						return new Best(1, state);
+    					}
     					
+    					bb = new Best(-1, state);
     					
     			}
-    			
+    		//if (bb.score != -1) System.out.println("TRUE");
+    			//return bb;
     			return bb;
-    			
-    			
     	}
     	
          
@@ -138,29 +133,50 @@ public class RingTreblecross {
     					return new Best (1, state);
     				}
     				else {
-    					//int score = 1000;
-    		    		Best bb = null;
+    					double score = Double.NEGATIVE_INFINITY;
+    					Best bb = new Best((int)score, state);
+    					
     		    			for(GameState node : gStates) {
-    		    				
-    		    				
-    		    				
-    		    				if (minValueAndBestSuccessor(node).score == 1) {
-    		    					// do nothing
-    		    					bb = new Best(1, gStates.get(0));
-    		    				}
-    		    				else  {
-    		    					return new Best(-1, node);
+    		    			
+    		    				if (minValueAndBestSuccessor(node).score == -1) {
+    		    					
+    		    					return new Best(-1,node);
     		    				}
     		    				
+    		    				
+
     		    			}
-    		    			
-    		    			return bb;
-	    			
-    		    			
-    		    			
+    		    		
+    		    			//return null;
+    		    			return new Best(1, gStates.get(0));
+
     				}
     }
     
+    
+    public Best compareMethod(Best node1, Best node2) {//returns the max
+    	
+    	if (node1.score > node2.score)
+    		return node1;
+    	
+//    	else if (node1.score == node2.score) {
+//    		
+//    		return node1;
+//    	}
+    	else {
+    		return node2;
+    	}
+    }
+    
+    public Best compareMethod2(Best node1, Best node2) { //returns the minimum
+    	if (node1.score < node2.score)
+    		return node1;
+//    	else if (node1.score == node2.score) {
+//    		return node1;
+//    	}
+    	else 
+    		return node2;
+    }
    
 
     // return a list of all successors of this state
