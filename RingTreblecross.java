@@ -101,30 +101,20 @@ public class RingTreblecross {
     				
     				//Best bb = new Best(score, ) = ;maxValueAndBestSuccessor(node)
     				
-    				
+    				if (maxValueAndBestSuccessor(node).score == 1) {
+    					//System.out.println("returning 1");
+    					return new Best(1, node);
+    				}
+    				else {
+    					//System.out.println("returning -1");
+    					bb = new Best(-1, node);
+    				}
     					
-    					bb = maxValueAndBestSuccessor(node);
-    					if (bb.score == -1) {
-    						//System.out.println("possible");
-    						
-    						bb = new Best(-1, bb.successor);
-    						//return bb;
-    						
-    					}
-    					else {
-    						
-    						//System.out.println(bb.score);		
-    						bb = new Best(1,node);
-    						//return bb;
-    						//return bb;
-    						//return bb;
-    						//return bb;
-    					}
-    				
-    				
+    					
     			}
     			
     			return bb;
+    			
     			
     	}
     	
@@ -148,30 +138,26 @@ public class RingTreblecross {
     					return new Best (1, state);
     				}
     				else {
-    					int score = 1000;
+    					//int score = 1000;
     		    		Best bb = null;
     		    			for(GameState node : gStates) {
     		    				
-    		    				//Best bb = new Best(score, ) = ;maxValueAndBestSuccessor(node)
     		    				
     		    				
-    		    					
-    		    					bb = minValueAndBestSuccessor(node);
-    		    					if (bb.score != 1) {
-    		    						//System.out.println("savage");
-    		    						return new Best(1, node);
-//    		    						return minValueAndBestSuccessor(node);
-    		    					}
-    		    					else {
-    		    						//System.out.println(bb.score);
-    		    						bb = new Best(-1,node);
-    		    					}
-    		    				
+    		    				if (minValueAndBestSuccessor(node).score == 1) {
+    		    					// do nothing
+    		    					bb = new Best(1, gStates.get(0));
+    		    				}
+    		    				else  {
+    		    					return new Best(-1, node);
+    		    				}
     		    				
     		    			}
-    	
-    	
+    		    			
     		    			return bb;
+	    			
+    		    			
+    		    			
     				}
     }
     
